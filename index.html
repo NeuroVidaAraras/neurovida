@@ -10,157 +10,203 @@
             theme: {
                 extend: {
                     colors: {
-                        'brand-blue': '#1A5276',
-                        'brand-green-dark': '#1E8449',
-                        'brand-green-light': '#2ECC71',
-                        'brand-gold': '#D4AF37',
-                        'brand-gray': '#707070',
+                        'neuro-blue': '#1A5276',
+                        'neuro-green-dark': '#1E8449',
+                        'neuro-green-light': '#2ECC71',
+                        'neuro-gold': '#D4AF37',
+                        'neuro-gray': '#707070',
+                        'neuro-bg': '#FDFBF8', // Warm off-white
                     },
                     fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Playfair Display', 'serif'],
+                        sans: ['Montserrat', 'sans-serif'],
                     }
                 }
             }
         }
     </script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #FAFAFA;
-            /* Usamos a textura sutil fornecida */
-            background-image: url('fundo.jfif'); 
+            background-color: #FDFBF8; /* Fundo mais sofisticado e quente */
+            background-image: url('fundo.jfif');
             background-size: cover;
             background-attachment: fixed;
-            background-blend-mode: overlay;
+            background-blend-mode: multiply; /* Suaviza a textura */
+        }
+        .hero-pattern {
+            background: linear-gradient(135deg, rgba(26,82,118,0.05) 0%, rgba(30,132,73,0.05) 100%);
         }
     </style>
 </head>
-<body class="text-brand-gray antialiased">
-    <!-- Header -->
-    <header class="bg-white/90 backdrop-blur-md shadow-sm sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-            <div class="flex items-center">
-                <img src="logo.jfif" alt="Instituto Neurovida Logo" class="h-16 w-auto mix-blend-multiply">
+<body class="font-sans text-neuro-gray antialiased selection:bg-neuro-gold selection:text-white">
+
+    <!-- Header Elegante -->
+    <header class="bg-white/95 backdrop-blur-sm border-b border-neuro-gold/20 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
+            <!-- Logo area -->
+            <div class="flex items-center gap-3">
+                <img src="logo.jfif" alt="Instituto Neurovida" class="h-16 w-auto object-contain rounded-md" onerror="this.src='https://via.placeholder.com/150x60?text=Neurovida+Logo'">
             </div>
-            <div>
-                <a href="#agendar" class="bg-brand-gold text-white font-semibold py-2 px-6 rounded-full hover:bg-yellow-600 transition duration-300 shadow-md">Agendar Consulta</a>
+            
+            <!-- Navigation & CTA -->
+            <div class="hidden md:flex items-center space-x-8">
+                <a href="#servicos" class="text-neuro-blue hover:text-neuro-green-dark font-medium transition">Serviços</a>
+                <a href="#sobre" class="text-neuro-blue hover:text-neuro-green-dark font-medium transition">Sobre</a>
+                <a href="#agendar" class="bg-neuro-gold text-white font-semibold py-2.5 px-8 rounded-md hover:bg-yellow-600 transition shadow-lg shadow-neuro-gold/30">Agendar Consulta</a>
             </div>
         </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="py-20 lg:py-32 text-center px-4">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-brand-blue mb-6">
-                Compreendendo sua mente, <br> <span class="text-brand-green-dark">transformando sua vida.</span>
-            </h1>
-            <p class="text-xl md:text-2xl mb-10 text-brand-gray font-light">
-                No Instituto Neurovida, oferecemos avaliação e reabilitação neuropsicológica de excelência para todas as idades.
-            </p>
-            <a href="#agendar" class="inline-block bg-brand-gold text-white text-lg font-bold py-4 px-10 rounded-full hover:scale-105 transition transform duration-300 shadow-lg">
-                Falar com um Especialista no WhatsApp
-            </a>
+    <!-- Hero Section Premium -->
+    <section class="hero-pattern py-20 lg:py-28 overflow-hidden relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <!-- Text Content -->
+                <div class="space-y-8 text-center lg:text-left">
+                    <div class="inline-block border border-neuro-green-light rounded-full px-4 py-1 bg-neuro-green-light/10 text-neuro-green-dark font-medium text-sm tracking-wide">
+                        Clínica de Neuropsicologia
+                    </div>
+                    <h1 class="font-serif text-5xl lg:text-6xl text-neuro-blue leading-tight font-bold">
+                        Compreensão clínica para uma vida <span class="text-neuro-green-dark italic">plena</span>.
+                    </h1>
+                    <p class="text-lg lg:text-xl text-neuro-gray leading-relaxed max-w-2xl mx-auto lg:mx-0 font-light">
+                        No Instituto Neurovida, unimos o rigor científico a um atendimento profundamente humano para avaliar e reabilitar a saúde da sua mente.
+                    </p>
+                    <div class="pt-4">
+                        <a href="#agendar" class="inline-block bg-neuro-blue text-white text-lg font-medium py-4 px-10 rounded-md hover:bg-neuro-green-dark transition-all duration-300 shadow-xl">
+                            Falar com um Especialista
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Image/Visual Content -->
+                <div class="relative hidden lg:block">
+                    <div class="absolute inset-0 bg-neuro-gold/20 rounded-t-full transform translate-x-4 translate-y-4"></div>
+                    <img src="identidade.jfif" alt="Neurovida Identidade" class="relative z-10 w-full h-[500px] object-cover rounded-t-full border-8 border-white shadow-2xl" onerror="this.style.display='none'">
+                </div>
+            </div>
         </div>
     </section>
 
-    <!-- Services Section -->
-    <section class="py-16 bg-white/95">
+    <!-- Serviços (com design sofisticado) -->
+    <section id="servicos" class="py-24 bg-white relative">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
-                <h2 class="text-3xl md:text-4xl font-bold text-brand-blue mb-4">Nossos Serviços</h2>
-                <div class="w-24 h-1 bg-brand-green-light mx-auto rounded"></div>
+                <h2 class="font-serif text-4xl font-bold text-neuro-blue mb-4">Áreas de Atuação</h2>
+                <div class="w-20 h-1 bg-neuro-gold mx-auto"></div>
             </div>
             
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                 <!-- Avaliação -->
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition duration-300 group">
-                    <div class="bg-brand-green-dark/10 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-green-dark/20 transition">
-                        <svg class="w-10 h-10 text-brand-green-dark" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
+                <div class="group bg-neuro-bg p-8 rounded-xl border border-gray-100 hover:border-neuro-green-light transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neuro-green-light/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <div class="w-14 h-14 bg-neuro-blue rounded-lg flex items-center justify-center mb-6 shadow-md text-white">
+                        <!-- Ícone Cérebro/Avaliação -->
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-brand-blue mb-3">Avaliação</h3>
-                    <p class="text-brand-gray text-sm">Compreensão detalhada do funcionamento cognitivo, comportamental e emocional.</p>
+                    <h3 class="font-serif text-2xl font-semibold text-neuro-blue mb-3">Avaliação</h3>
+                    <p class="text-neuro-gray text-sm leading-relaxed">Diagnóstico preciso do funcionamento cognitivo, comportamental e emocional com foco no desenvolvimento.</p>
                 </div>
 
                 <!-- Reabilitação -->
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition duration-300 group">
-                    <div class="bg-brand-green-light/20 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-green-light/30 transition">
-                        <svg class="w-10 h-10 text-brand-green-light" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                <div class="group bg-neuro-bg p-8 rounded-xl border border-gray-100 hover:border-neuro-green-dark transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neuro-green-dark/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <div class="w-14 h-14 bg-neuro-green-dark rounded-lg flex items-center justify-center mb-6 shadow-md text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-brand-blue mb-3">Reabilitação</h3>
-                    <p class="text-brand-gray text-sm">Intervenções personalizadas para restaurar ou compensar funções cognitivas comprometidas.</p>
+                    <h3 class="font-serif text-2xl font-semibold text-neuro-blue mb-3">Reabilitação</h3>
+                    <p class="text-neuro-gray text-sm leading-relaxed">Intervenções clínicas planejadas sob medida para restaurar a qualidade de vida e a autonomia.</p>
                 </div>
 
                 <!-- Orientação -->
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition duration-300 group">
-                    <div class="bg-brand-blue/10 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-blue/20 transition">
-                        <svg class="w-10 h-10 text-brand-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
+                <div class="group bg-neuro-bg p-8 rounded-xl border border-gray-100 hover:border-neuro-gold transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neuro-gold/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <div class="w-14 h-14 bg-neuro-gold rounded-lg flex items-center justify-center mb-6 shadow-md text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-brand-blue mb-3">Orientação</h3>
-                    <p class="text-brand-gray text-sm">Suporte e psicoeducação para familiares e cuidadores, promovendo qualidade de vida.</p>
+                    <h3 class="font-serif text-2xl font-semibold text-neuro-blue mb-3">Orientação</h3>
+                    <p class="text-neuro-gray text-sm leading-relaxed">Psicoeducação e acolhimento contínuo para familiares e cuidadores, estruturando uma rede de apoio.</p>
                 </div>
 
                 <!-- Pesquisa -->
-                <div class="bg-gray-50 rounded-2xl p-8 text-center shadow-sm border border-gray-100 hover:shadow-md transition duration-300 group">
-                    <div class="bg-brand-gold/10 w-20 h-20 mx-auto rounded-full flex items-center justify-center mb-6 group-hover:bg-brand-gold/20 transition">
-                        <svg class="w-10 h-10 text-brand-gold" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <div class="group bg-neuro-bg p-8 rounded-xl border border-gray-100 hover:border-neuro-blue transition-all duration-300 hover:shadow-xl hover:-translate-y-1 relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-16 h-16 bg-neuro-blue/10 rounded-bl-full -z-10 group-hover:scale-150 transition-transform"></div>
+                    <div class="w-14 h-14 bg-neuro-blue rounded-lg flex items-center justify-center mb-6 shadow-md text-white">
+                        <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
                     </div>
-                    <h3 class="text-xl font-bold text-brand-blue mb-3">Pesquisa</h3>
-                    <p class="text-brand-gray text-sm">Engajamento constante com estudos para oferecer tratamentos baseados em evidências.</p>
+                    <h3 class="font-serif text-2xl font-semibold text-neuro-blue mb-3">Pesquisa</h3>
+                    <p class="text-neuro-gray text-sm leading-relaxed">Prática fundamentada nas mais recentes e rigorosas evidências científicas globais.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section class="py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
-            <div class="w-full md:w-1/2">
-                <img src="identidade.jfif" alt="Sobre o Instituto" class="rounded-2xl shadow-lg w-full h-auto object-cover border-4 border-white mix-blend-multiply">
-            </div>
-            <div class="w-full md:w-1/2">
-                <h2 class="text-3xl font-bold text-brand-blue mb-6">Por que escolher o Instituto Neurovida?</h2>
-                <p class="text-brand-gray mb-4">
-                    Somos uma clínica especializada dedicada a entender a complexidade do cérebro humano. Nossa equipe de neuropsicólogos é altamente capacitada para identificar as raízes de dificuldades cognitivas e comportamentais.
-                </p>
-                <p class="text-brand-gray mb-6">
-                    Acreditamos em um atendimento humanizado, onde cada paciente é único. Utilizamos ferramentas modernas e comprovadas cientificamente para garantir o melhor diagnóstico e plano de intervenção.
-                </p>
-                <ul class="space-y-3">
-                    <li class="flex items-center text-brand-green-dark font-medium">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Atendimento Personalizado
-                    </li>
-                    <li class="flex items-center text-brand-green-dark font-medium">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Profissionais Especializados
-                    </li>
-                    <li class="flex items-center text-brand-green-dark font-medium">
-                        <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        Abordagem Científica
-                    </li>
-                </ul>
+    <!-- Seção Institucional -->
+    <section id="sobre" class="py-24 bg-neuro-blue text-white relative">
+        <!-- Detalhe dourado de separação -->
+        <div class="absolute top-0 left-0 w-full h-2 bg-neuro-gold"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <div>
+                    <h2 class="font-serif text-4xl font-bold mb-6 text-white">O Instituto</h2>
+                    <div class="w-16 h-1 bg-neuro-green-light mb-8"></div>
+                    <p class="text-blue-50 font-light text-lg mb-6 leading-relaxed">
+                        Nascido do desejo de transformar o cuidado com a saúde mental, o Instituto Neurovida é referência em investigação e cuidado neuropsicológico.
+                    </p>
+                    <p class="text-blue-100 font-light mb-8 leading-relaxed">
+                        Nossa abordagem transcende o diagnóstico. Nós olhamos para a pessoa, para sua história e para seu potencial, empregando ferramentas validadas cientificamente e a expertise de profissionais em constante atualização.
+                    </p>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-neuro-green-dark rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="font-medium">Excelência Científica</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-10 h-10 bg-neuro-green-dark rounded-full flex items-center justify-center mr-4">
+                                <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                            </div>
+                            <span class="font-medium">Acolhimento Humanizado</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="relative">
+                    <div class="aspect-square bg-white/5 rounded-2xl p-4 border border-white/10">
+                        <img src="identidade.jfif" alt="Clínica" class="w-full h-full object-cover rounded-xl opacity-90 hover:opacity-100 transition duration-500" onerror="this.src='https://via.placeholder.com/500x500?text=Foto+da+Clínica'">
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer CTA & Contact -->
-    <footer id="agendar" class="bg-brand-blue pt-16 pb-8 border-t-8 border-brand-green-dark">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-white">
-            <h2 class="text-3xl font-bold mb-6">Pronto para dar o primeiro passo?</h2>
-            <p class="text-blue-100 mb-8 max-w-2xl mx-auto">
-                Agende sua consulta hoje mesmo e comece a jornada para uma melhor qualidade de vida. Nossa equipe está pronta para te atender.
-            </p>
-            <a href="https://wa.me/5511999999999?text=Olá,%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida." target="_blank" class="inline-block bg-brand-gold text-brand-blue text-lg font-bold py-4 px-10 rounded-full hover:bg-yellow-400 transition transform duration-300 shadow-xl mb-16">
-                Chamar no WhatsApp
-            </a>
+    <!-- Footer Elegante -->
+    <footer id="agendar" class="bg-neuro-bg pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="bg-white rounded-2xl shadow-xl p-10 md:p-16 text-center -mt-32 relative z-20 border border-gray-100">
+                <h2 class="font-serif text-3xl md:text-4xl font-bold text-neuro-blue mb-4">Agende sua Avaliação</h2>
+                <p class="text-neuro-gray mb-10 max-w-2xl mx-auto">
+                    Nossa equipe de recepção está pronta para esclarecer suas dúvidas e encontrar o melhor horário para você.
+                </p>
+                <a href="https://wa.me/5511999999999?text=Olá,%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida." target="_blank" class="inline-flex items-center justify-center bg-neuro-gold text-white text-lg font-semibold py-4 px-12 rounded-md hover:bg-yellow-600 transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-1">
+                    <svg class="w-6 h-6 mr-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825.001 6.938 3.115 6.937 6.938-.001 3.825-3.113 6.938-6.937 6.938z"></path></svg>
+                    Chamar no WhatsApp
+                </a>
+            </div>
             
-            <div class="border-t border-blue-800 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-blue-200 gap-4">
+            <div class="mt-16 flex flex-col md:flex-row justify-between items-center text-sm text-neuro-gray gap-4">
                 <p>&copy; 2026 Instituto Neurovida. Todos os direitos reservados.</p>
-                <div class="flex space-x-4">
-                    <a href="#" class="hover:text-white transition">Instagram</a>
-                    <a href="#" class="hover:text-white transition">Facebook</a>
-                    <a href="#" class="hover:text-white transition">Contato</a>
+                <div class="flex space-x-6">
+                    <a href="#" class="hover:text-neuro-blue transition font-medium">Instagram</a>
+                    <a href="#" class="hover:text-neuro-blue transition font-medium">Facebook</a>
+                    <a href="#" class="hover:text-neuro-blue transition font-medium">LinkedIn</a>
                 </div>
             </div>
         </div>
