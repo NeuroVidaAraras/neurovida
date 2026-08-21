@@ -116,12 +116,13 @@
      HEADER
 ════════════════════════════════════════ -->
 <header id="header" class="bg-ncr/96 backdrop-blur-md border-b border-ngo/20 fixed top-0 inset-x-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-20 flex items-center justify-between">
+    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-24 flex items-center justify-between">
 
-        <!-- Logo: imagem recortada com fundo idêntico ao logo -->
+        <!-- Logo no header: imagem limpa sobre fundo creme -->
         <a href="#" class="logo-wrap">
             <img src="logo-isolado.jpg"
-                 alt="Instituto Neurovida — Clínica de Neuropsicologia">
+                 alt="Instituto Neurovida — Clínica de Neuropsicologia"
+                 class="h-16 w-auto object-contain">
         </a>
 
         <!-- Nav desktop -->
@@ -190,17 +191,15 @@
 
             <!-- Visual: logo em moldura circular limpa -->
             <div class="reveal hidden lg:flex justify-center items-center">
-                <div class="relative w-[420px] h-[420px]">
-                    <!-- Anéis decorativos -->
-                    <div class="absolute inset-0 rounded-full border border-ngo/25" style="transform:scale(1.12);"></div>
-                    <div class="absolute inset-0 rounded-full border border-ngo/12" style="transform:scale(1.28);"></div>
-                    <!-- Container creme que isola o logo perfeitamente -->
-                    <div class="absolute inset-0 rounded-full overflow-hidden shadow-2xl"
-                         style="background:#F3F0EC;">
-                        <img src="logo-isolado.jpg"
-                             alt="Instituto Neurovida"
-                             class="w-full h-full object-contain p-10">
-                    </div>
+                <div class="relative">
+                    <!-- Sombra dourada de fundo -->
+                    <div class="absolute -inset-3 rounded-2xl"
+                         style="background: linear-gradient(135deg, rgba(212,175,55,.18) 0%, rgba(30,132,73,.10) 100%); filter: blur(16px);"></div>
+                    <!-- Imagem do logo grande, limpa, retangular — sem crop circular -->
+                    <img src="logo-isolado.jpg"
+                         alt="Instituto Neurovida"
+                         class="relative z-10 w-[520px] max-w-full object-contain rounded-xl"
+                         style="box-shadow: 0 32px 64px rgba(26,82,118,.14), 0 0 0 1px rgba(212,175,55,.25);">
                 </div>
             </div>
         </div>
