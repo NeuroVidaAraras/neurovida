@@ -21,9 +21,6 @@
                         serif: ['"Cormorant Garamond"', 'Georgia', 'serif'],
                         sans:  ['"DM Sans"', 'sans-serif'],
                     },
-                    letterSpacing: {
-                        widest2: '0.25em',
-                    }
                 }
             }
         }
@@ -34,178 +31,181 @@
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 
     <style>
-        * { box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
         body {
             background-color: #F3F0EC;
             font-family: 'DM Sans', sans-serif;
             color: #707070;
+            overflow-x: hidden;
         }
 
-        /* ── Animações ─────────────────────────── */
-        @keyframes expand {
-            from { transform: scaleX(0); }
-            to   { transform: scaleX(1); }
-        }
+        /* ── Animações ───────────────────────────── */
+        @keyframes expand { from{transform:scaleX(0)} to{transform:scaleX(1)} }
         .gold-line { animation: expand 1.2s ease forwards; transform-origin: left; }
 
         .reveal {
             opacity: 0;
-            transform: translateY(28px);
-            transition: opacity 0.75s ease, transform 0.75s ease;
+            transform: translateY(24px);
+            transition: opacity .7s ease, transform .7s ease;
         }
-        .reveal.visible { opacity: 1; transform: translateY(0); }
+        .reveal.visible { opacity:1; transform:translateY(0); }
 
-        /* ── Hero background ────────────────────── */
-        .hero-bg {
-            background: linear-gradient(150deg, #F3F0EC 50%, #EAF5F0 100%);
-        }
-
-        /* ── Logo no header: container creme limpo ── */
-        .logo-wrap {
-            background: transparent;
-            display: flex;
-            align-items: center;
-        }
-        .logo-wrap img {
-            height: 52px;
-            width: auto;
-            object-fit: contain;
-            display: block;
-        }
-
-        /* ── Card hover ────────────────────────── */
-        .card-lift {
-            transition: transform .35s ease, box-shadow .35s ease;
-        }
-        .card-lift:hover {
-            transform: translateY(-7px);
-            box-shadow: 0 20px 44px rgba(26,82,118,.11);
-        }
-
-        /* ── CTA pulse ─────────────────────────── */
         @keyframes pulse-gold {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(212,175,55,.35); }
-            70%       { box-shadow: 0 0 0 12px rgba(212,175,55,0); }
+            0%,100% { box-shadow:0 0 0 0 rgba(212,175,55,.35); }
+            70%      { box-shadow:0 0 0 10px rgba(212,175,55,0); }
         }
         .cta-pulse { animation: pulse-gold 2.6s infinite; }
 
-        /* ── Divisor ornamental ─────────────────── */
-        .ornament::before,
-        .ornament::after {
-            content: '';
-            display: inline-block;
-            height: 1px;
-            width: 48px;
-            background: #D4AF37;
-            vertical-align: middle;
-            margin: 0 12px;
+        @keyframes bounce-arrow {
+            0%,100% { transform: translateY(0); }
+            50%      { transform: translateY(6px); }
+        }
+        .bounce-arrow { animation: bounce-arrow 1.6s ease-in-out infinite; }
+
+        /* ── Hero bg ─────────────────────────────── */
+        .hero-bg { background: linear-gradient(150deg,#F3F0EC 50%,#EAF5F0 100%); }
+
+        /* ── Neurovida section ───────────────────── */
+        .neuro-word { color:#F3F0EC; }
+        .vida-word  { color:#D4AF37; }
+
+        .ornament::before, .ornament::after {
+            content:''; display:inline-block; height:1px; width:36px;
+            background:#D4AF37; vertical-align:middle; margin:0 10px;
         }
 
-        /* ── Seção neurovida: destaque tipográfico ─ */
-        .neuro-word { color: #F3F0EC; }
-        .vida-word  { color: #D4AF37; }
+        /* ── Card hover ──────────────────────────── */
+        .card-lift { transition: transform .3s ease, box-shadow .3s ease; }
+        .card-lift:hover { transform:translateY(-6px); box-shadow:0 18px 40px rgba(26,82,118,.10); }
 
+        /* ── Header ──────────────────────────────── */
         header { transition: box-shadow .3s; }
 
-        /* Impede que headings e blocos centralizados herdem text-justify */
-        h1, h2, h3, h4, h5, h6,
-        .text-center,
-        nav,
-        footer,
-        .ornament,
-        blockquote {
-            text-align: unset;
+        /* ── Mobile menu ─────────────────────────── */
+        #mobile-menu {
+            display: none;
+            flex-direction: column;
+            background: #F3F0EC;
+            border-top: 1px solid rgba(212,175,55,.2);
         }
-        h1, h2 { text-align: left; }
-        .text-center h2,
-        .text-center h3,
-        .text-center p { text-align: center; }
+        #mobile-menu.open { display: flex; }
+
+        /* ── Text alignment ──────────────────────── */
+        p.body-text { text-align: justify; }
+        h1,h2,h3,h4 { text-align: left; }
+        .center-section h2,
+        .center-section h3,
+        .center-section p { text-align: center; }
         blockquote { text-align: center; }
+
+        /* ── Prevent horizontal overflow ─────────── */
+        section, div { max-width: 100%; }
+        img { max-width: 100%; height: auto; }
     </style>
 </head>
-<body class="antialiased text-justify">
+<body class="antialiased">
 
 <!-- ════════════════════════════════════════
-     HEADER
+     HEADER (fixo, responsivo, com hamburger)
 ════════════════════════════════════════ -->
-<header id="header" class="bg-ncr/96 backdrop-blur-md border-b border-ngo/20 fixed top-0 inset-x-0 z-50">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 h-24 flex items-center justify-between">
+<header id="header" class="bg-ncr/97 backdrop-blur-md border-b border-ngo/20 fixed top-0 inset-x-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="h-20 flex items-center justify-between">
 
-        <!-- Logo no header: imagem limpa sobre fundo creme -->
-        <a href="#" class="logo-wrap">
-            <img src="logo-isolado.jpg"
-                 alt="Instituto Neurovida — Clínica de Neuropsicologia"
-                 class="h-16 w-auto object-contain">
-        </a>
+            <!-- Logo -->
+            <a href="#" class="flex-shrink-0">
+                <img src="logo-isolado.jpg"
+                     alt="Instituto Neurovida"
+                     class="h-14 sm:h-16 w-auto object-contain">
+            </a>
 
-        <!-- Nav desktop -->
-        <nav class="hidden md:flex items-center gap-9">
-            <a href="#quem-somos" class="text-nb text-sm font-medium tracking-wide hover:text-ngd transition">Quem Somos</a>
-            <a href="#servicos"   class="text-nb text-sm font-medium tracking-wide hover:text-ngd transition">Serviços</a>
-            <a href="#neurovida"  class="text-nb text-sm font-medium tracking-wide hover:text-ngd transition">Nossa História</a>
-            <a href="#agendar"    class="text-nb text-sm font-medium tracking-wide hover:text-ngd transition">Contato</a>
-        </nav>
+            <!-- Nav desktop -->
+            <nav class="hidden lg:flex items-center gap-8">
+                <a href="#quem-somos" class="text-nb text-sm font-medium hover:text-ngd transition">Quem Somos</a>
+                <a href="#servicos"   class="text-nb text-sm font-medium hover:text-ngd transition">Serviços</a>
+                <a href="#neurovida"  class="text-nb text-sm font-medium hover:text-ngd transition">Nossa História</a>
+                <a href="#agendar"    class="text-nb text-sm font-medium hover:text-ngd transition">Contato</a>
+            </nav>
 
-        <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida."
-           target="_blank"
-           class="cta-pulse hidden md:inline-flex items-center gap-2 bg-nb text-white text-sm font-medium tracking-wide px-7 py-3 rounded-md hover:bg-ngd transition-colors duration-300">
-            Agendar Consulta
-        </a>
+            <div class="flex items-center gap-3">
+                <!-- CTA desktop -->
+                <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida."
+                   target="_blank"
+                   class="cta-pulse hidden lg:inline-flex items-center gap-2 bg-nb text-white text-sm font-medium px-6 py-3 rounded-md hover:bg-ngd transition-colors">
+                    Agendar Consulta
+                </a>
+
+                <!-- Botão hamburger mobile/tablet -->
+                <button id="menu-btn" aria-label="Abrir menu"
+                        class="lg:hidden flex flex-col justify-center items-center w-10 h-10 gap-1.5 rounded-md hover:bg-nb/5 transition">
+                    <span class="block w-6 h-0.5 bg-nb transition-transform" id="bar1"></span>
+                    <span class="block w-6 h-0.5 bg-nb transition-opacity"   id="bar2"></span>
+                    <span class="block w-6 h-0.5 bg-nb transition-transform" id="bar3"></span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Menu mobile dropdown -->
+    <div id="mobile-menu">
+        <div class="max-w-7xl mx-auto px-4 py-4 flex flex-col gap-1">
+            <a href="#quem-somos" class="mobile-link text-nb font-medium py-3 px-4 rounded-lg hover:bg-nb/5 transition text-sm">Quem Somos</a>
+            <a href="#servicos"   class="mobile-link text-nb font-medium py-3 px-4 rounded-lg hover:bg-nb/5 transition text-sm">Serviços</a>
+            <a href="#neurovida"  class="mobile-link text-nb font-medium py-3 px-4 rounded-lg hover:bg-nb/5 transition text-sm">Nossa História</a>
+            <a href="#agendar"    class="mobile-link text-nb font-medium py-3 px-4 rounded-lg hover:bg-nb/5 transition text-sm">Contato</a>
+            <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida."
+               target="_blank"
+               class="mt-2 bg-ngo text-white text-sm font-medium text-center py-3 px-4 rounded-md hover:bg-yellow-600 transition">
+                Agendar Consulta via WhatsApp
+            </a>
+        </div>
     </div>
 </header>
 
 
 <!-- ════════════════════════════════════════
-     CAPA (SPLASH) — Logotipo + Fundo de pessoas felizes
+     CAPA — Logo centralizado + fundo pessoas felizes
 ════════════════════════════════════════ -->
-<section id="capa" class="relative flex items-center justify-center overflow-hidden"
-         style="min-height:100vh;">
+<section id="capa" class="relative flex items-center justify-center overflow-hidden" style="min-height:100svh;">
 
-    <!-- Foto de fundo: pessoas felizes / saúde mental (Unsplash) -->
+    <!-- Foto de fundo -->
     <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
-         style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&auto=format&fit=crop&q=80');"></div>
+         style="background-image:url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&auto=format&fit=crop&q=80');"></div>
 
-    <!-- Overlay gradiente para legibilidade e elegância da marca -->
+    <!-- Overlay gradiente com cores da marca -->
     <div class="absolute inset-0"
-         style="background: linear-gradient(160deg,
-             rgba(26,82,118,0.82) 0%,
-             rgba(30,132,73,0.65) 60%,
-             rgba(26,82,118,0.88) 100%);"></div>
+         style="background:linear-gradient(160deg,rgba(26,82,118,.84) 0%,rgba(30,132,73,.65) 55%,rgba(26,82,118,.90) 100%);"></div>
 
-    <!-- Partícula / textura sutil -->
+    <!-- Pontilhado sutil -->
     <div class="absolute inset-0 opacity-5"
-         style="background-image: radial-gradient(circle, #D4AF37 1px, transparent 1px);
-                background-size: 40px 40px;"></div>
+         style="background-image:radial-gradient(circle,#D4AF37 1px,transparent 1px);background-size:38px 38px;"></div>
 
-    <!-- Conteúdo centralizado -->
-    <div class="relative z-10 flex flex-col items-center text-center px-6 py-24 space-y-8">
+    <!-- Conteúdo -->
+    <div class="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 py-28 sm:py-32 gap-6 sm:gap-8 w-full">
 
-        <!-- Logo grande e centralizado -->
-        <div class="reveal">
+        <!-- Logo grande centralizado -->
+        <div class="reveal w-full flex justify-center">
             <img src="logo-isolado.jpg"
                  alt="Instituto Neurovida — Clínica de Neuropsicologia"
-                 class="w-[340px] md:w-[620px] lg:w-[700px] max-w-full object-contain mx-auto rounded-2xl"
-                 style="filter: drop-shadow(0 0 60px rgba(212,175,55,.5)); box-shadow: 0 0 0 1px rgba(212,175,55,.2);">
+                 class="w-[260px] sm:w-[400px] md:w-[540px] lg:w-[680px] object-contain rounded-2xl"
+                 style="filter:drop-shadow(0 0 56px rgba(212,175,55,.55)); box-shadow:0 0 0 1px rgba(212,175,55,.22);">
         </div>
 
         <!-- Linha dourada -->
-        <div class="reveal w-24 h-px bg-ngo mx-auto opacity-80" style="transition-delay:.2s"></div>
+        <div class="reveal w-20 h-px bg-ngo opacity-80"></div>
 
         <!-- Tagline -->
-        <p class="reveal font-sans font-light text-white/90 tracking-widest2 uppercase text-xs md:text-sm"
-           style="letter-spacing:.3em; transition-delay:.3s">
+        <p class="reveal font-sans font-light text-white/90 text-[10px] sm:text-xs uppercase tracking-[.28em]">
             Clínica de Neuropsicologia
         </p>
 
-        <!-- CTA de descida -->
+        <!-- Scroll down -->
         <a href="#hero"
-           class="reveal mt-10 inline-flex flex-col items-center gap-2 text-white/70 hover:text-ngo transition-colors duration-300 group"
-           style="transition-delay:.5s">
-            <span class="font-sans text-xs tracking-widest2 uppercase">Conheça o Instituto</span>
-            <!-- Seta animada -->
-            <svg class="w-6 h-6 animate-bounce group-hover:text-ngo" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+           class="reveal mt-6 sm:mt-8 flex flex-col items-center gap-1.5 text-white/65 hover:text-ngo transition-colors group">
+            <span class="font-sans text-[10px] sm:text-xs uppercase tracking-[.2em]">Conheça o Instituto</span>
+            <svg class="bounce-arrow w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
             </svg>
         </a>
@@ -214,44 +214,44 @@
 
 
 <!-- ════════════════════════════════════════
-     HERO
+     HERO — Texto principal
 ════════════════════════════════════════ -->
-<section id="hero" class="hero-bg pt-36 pb-28 lg:pt-44 lg:pb-36 overflow-hidden">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="grid lg:grid-cols-2 gap-16 items-center">
+<section id="hero" class="hero-bg pt-28 sm:pt-32 lg:pt-40 pb-20 sm:pb-24 lg:pb-32 overflow-hidden">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
 
             <!-- Texto -->
-            <div class="reveal space-y-8">
-                <p class="text-ngd text-xs tracking-widest2 uppercase font-medium">
+            <div class="reveal space-y-6 sm:space-y-8 text-center lg:text-left">
+                <p class="text-ngd text-xs uppercase tracking-[.22em] font-medium">
                     Clínica de Neuropsicologia
                 </p>
 
                 <h1 class="font-serif text-nb leading-[1.1] font-semibold"
-                    style="font-size: clamp(2.8rem, 5vw, 4.4rem);">
+                    style="font-size:clamp(2.2rem,6vw,4.2rem);">
                     A saúde da sua mente<br>
                     merece cuidado<br>
                     <em class="text-ngd">especializado</em>.
                 </h1>
 
-                <div class="w-20 h-0.5 bg-ngo gold-line"></div>
+                <div class="w-16 h-0.5 bg-ngo gold-line mx-auto lg:mx-0"></div>
 
-                <p class="font-light text-ngr leading-relaxed max-w-lg"
-                   style="font-size:1.1rem;">
+                <p class="body-text font-light text-ngr leading-relaxed max-w-lg mx-auto lg:mx-0 text-base sm:text-lg">
                     Avaliação, reabilitação e orientação neuropsicológica com rigor
                     científico e acolhimento humano — para todas as fases da vida.
                 </p>
 
-                <div class="flex flex-wrap gap-4 pt-2">
+                <!-- Botões empilhados no mobile, lado a lado no sm+ -->
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 pt-2">
                     <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida."
                        target="_blank"
-                       class="cta-pulse inline-flex items-center gap-3 bg-ngo text-white text-sm font-medium tracking-wide px-8 py-4 rounded-md hover:bg-yellow-600 transition-colors duration-300">
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                       class="cta-pulse inline-flex items-center justify-center gap-2 bg-ngo text-white text-sm font-medium px-7 py-4 rounded-md hover:bg-yellow-600 transition-colors w-full sm:w-auto">
+                        <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                             <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825.001 6.938 3.115 6.937 6.938-.001 3.825-3.113 6.938-6.937 6.938z"/>
                         </svg>
                         Falar pelo WhatsApp
                     </a>
                     <a href="#servicos"
-                       class="inline-flex items-center gap-2 border border-nb text-nb text-sm font-medium tracking-wide px-8 py-4 rounded-md hover:bg-nb hover:text-white transition-colors duration-300">
+                       class="inline-flex items-center justify-center gap-2 border border-nb text-nb text-sm font-medium px-7 py-4 rounded-md hover:bg-nb hover:text-white transition-colors w-full sm:w-auto">
                         Ver Serviços
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
@@ -260,17 +260,15 @@
                 </div>
             </div>
 
-            <!-- Visual: logo em moldura circular limpa -->
+            <!-- Logo decorativo — só desktop -->
             <div class="reveal hidden lg:flex justify-center items-center">
                 <div class="relative">
-                    <!-- Sombra dourada de fundo -->
-                    <div class="absolute -inset-3 rounded-2xl"
-                         style="background: linear-gradient(135deg, rgba(212,175,55,.18) 0%, rgba(30,132,73,.10) 100%); filter: blur(16px);"></div>
-                    <!-- Imagem do logo grande, limpa, retangular — sem crop circular -->
+                    <div class="absolute -inset-4 rounded-2xl"
+                         style="background:linear-gradient(135deg,rgba(212,175,55,.16) 0%,rgba(30,132,73,.09) 100%);filter:blur(18px);"></div>
                     <img src="logo-isolado.jpg"
                          alt="Instituto Neurovida"
-                         class="relative z-10 w-[520px] max-w-full object-contain rounded-xl"
-                         style="box-shadow: 0 32px 64px rgba(26,82,118,.14), 0 0 0 1px rgba(212,175,55,.25);">
+                         class="relative z-10 w-[480px] object-contain rounded-xl"
+                         style="box-shadow:0 28px 56px rgba(26,82,118,.13),0 0 0 1px rgba(212,175,55,.22);">
                 </div>
             </div>
         </div>
@@ -281,24 +279,24 @@
 <!-- ════════════════════════════════════════
      TRUST BAR
 ════════════════════════════════════════ -->
-<div class="bg-nb text-white py-10">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+<div class="bg-nb text-white py-10 sm:py-12">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
             <div class="reveal">
-                <p class="font-serif text-4xl font-semibold text-ngo">+500</p>
-                <p class="text-xs tracking-widest2 uppercase text-blue-200 mt-1 font-sans">Pacientes Atendidos</p>
+                <p class="font-serif text-3xl sm:text-4xl font-semibold text-ngo">+500</p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-[.18em] text-blue-200 mt-1">Pacientes Atendidos</p>
             </div>
             <div class="reveal" style="transition-delay:.1s">
-                <p class="font-serif text-4xl font-semibold text-ngo">4</p>
-                <p class="text-xs tracking-widest2 uppercase text-blue-200 mt-1 font-sans">Áreas de Atuação</p>
+                <p class="font-serif text-3xl sm:text-4xl font-semibold text-ngo">4</p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-[.18em] text-blue-200 mt-1">Áreas de Atuação</p>
             </div>
             <div class="reveal" style="transition-delay:.2s">
-                <p class="font-serif text-4xl font-semibold text-ngo">100%</p>
-                <p class="text-xs tracking-widest2 uppercase text-blue-200 mt-1 font-sans">Baseado em Evidências</p>
+                <p class="font-serif text-3xl sm:text-4xl font-semibold text-ngo">100%</p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-[.18em] text-blue-200 mt-1">Baseado em Evidências</p>
             </div>
             <div class="reveal" style="transition-delay:.3s">
-                <p class="font-serif text-4xl font-semibold text-ngo">♥</p>
-                <p class="text-xs tracking-widest2 uppercase text-blue-200 mt-1 font-sans">Atendimento Humanizado</p>
+                <p class="font-serif text-3xl sm:text-4xl font-semibold text-ngo">♥</p>
+                <p class="text-[10px] sm:text-xs uppercase tracking-[.18em] text-blue-200 mt-1">Atendimento Humanizado</p>
             </div>
         </div>
     </div>
@@ -308,29 +306,28 @@
 <!-- ════════════════════════════════════════
      QUEM SOMOS
 ════════════════════════════════════════ -->
-<section id="quem-somos" class="py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="grid lg:grid-cols-2 gap-20 items-center">
+<section id="quem-somos" class="py-20 sm:py-24 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
 
             <!-- Texto -->
-            <div class="reveal space-y-7">
-                <p class="text-ngd text-xs tracking-widest2 uppercase font-medium">O Instituto</p>
+            <div class="reveal space-y-5 sm:space-y-6">
+                <p class="text-ngd text-xs uppercase tracking-[.22em] font-medium">O Instituto</p>
                 <h2 class="font-serif text-nb font-semibold leading-tight"
-                    style="font-size:clamp(2rem,4vw,3rem);">
+                    style="font-size:clamp(1.9rem,4vw,3rem);">
                     Quem somos
                 </h2>
-                <div class="w-16 h-0.5 bg-ngo gold-line"></div>
-                <p class="font-light text-ngr leading-relaxed text-base">
+                <div class="w-14 h-0.5 bg-ngo gold-line"></div>
+                <p class="body-text font-light text-ngr leading-relaxed text-sm sm:text-base">
                     O Instituto Neurovida é uma clínica especializada em neuropsicologia, fundada com o propósito
                     de unir o rigor das ciências do cérebro ao calor do cuidado humano. Nossa equipe é formada
                     por neuropsicólogos com formação continuada, dedicados a oferecer avaliações e intervenções
                     com precisão, ética e sensibilidade.
                 </p>
-                <p class="font-light text-ngr leading-relaxed text-base">
+                <p class="body-text font-light text-ngr leading-relaxed text-sm sm:text-base">
                     Acreditamos que cada pessoa é única e que entender o funcionamento da mente é o primeiro passo
                     para uma vida com mais qualidade, autonomia e significado.
                 </p>
-
                 <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20conhecer%20melhor%20o%20Instituto%20Neurovida."
                    target="_blank"
                    class="inline-flex items-center gap-2 text-nb text-sm font-medium border-b border-ngo pb-0.5 hover:text-ngd transition">
@@ -341,53 +338,45 @@
                 </a>
             </div>
 
-            <!-- Cards de valores -->
-            <div class="reveal grid grid-cols-2 gap-5">
-                <!-- Ética -->
-                <div class="card-lift bg-ncr rounded-xl p-7 border border-transparent hover:border-nb/15">
-                    <div class="w-10 h-10 rounded-lg bg-nb flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+            <!-- Cards de valores: 2 colunas em todos os tamanhos -->
+            <div class="reveal grid grid-cols-2 gap-4 sm:gap-5">
+                <div class="card-lift bg-ncr rounded-xl p-5 sm:p-7 border border-transparent hover:border-nb/15">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-nb flex items-center justify-center mb-3 sm:mb-4">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
                         </svg>
                     </div>
-                    <h4 class="font-serif text-nb text-xl font-semibold mb-2">Ética</h4>
+                    <h4 class="font-serif text-nb text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Ética</h4>
                     <p class="text-xs text-ngr leading-relaxed">Sigilo, respeito e conduta irrepreensível em cada atendimento.</p>
                 </div>
 
-                <!-- Ciência -->
-                <div class="card-lift bg-ncr rounded-xl p-7 border border-transparent hover:border-ngd/20">
-                    <div class="w-10 h-10 rounded-lg bg-ngd flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+                <div class="card-lift bg-ncr rounded-xl p-5 sm:p-7 border border-transparent hover:border-ngd/20">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-ngd flex items-center justify-center mb-3 sm:mb-4">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
                         </svg>
                     </div>
-                    <h4 class="font-serif text-nb text-xl font-semibold mb-2">Ciência</h4>
+                    <h4 class="font-serif text-nb text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Ciência</h4>
                     <p class="text-xs text-ngr leading-relaxed">Práticas baseadas em evidências científicas atualizadas.</p>
                 </div>
 
-                <!-- Acolhimento -->
-                <div class="card-lift bg-ncr rounded-xl p-7 border border-transparent hover:border-ngo/25">
-                    <div class="w-10 h-10 rounded-lg bg-ngo flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+                <div class="card-lift bg-ncr rounded-xl p-5 sm:p-7 border border-transparent hover:border-ngo/25">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-ngo flex items-center justify-center mb-3 sm:mb-4">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                         </svg>
                     </div>
-                    <h4 class="font-serif text-nb text-xl font-semibold mb-2">Acolhimento</h4>
+                    <h4 class="font-serif text-nb text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Acolhimento</h4>
                     <p class="text-xs text-ngr leading-relaxed">Escuta ativa e empatia genuína em cada encontro clínico.</p>
                 </div>
 
-                <!-- Compromisso -->
-                <div class="card-lift bg-ncr rounded-xl p-7 border border-transparent hover:border-nb/15">
-                    <div class="w-10 h-10 rounded-lg bg-nb flex items-center justify-center mb-4">
-                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                                  d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
+                <div class="card-lift bg-ncr rounded-xl p-5 sm:p-7 border border-transparent hover:border-nb/15">
+                    <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-lg bg-nb flex items-center justify-center mb-3 sm:mb-4">
+                        <svg class="w-4 h-4 sm:w-5 sm:h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11.049 2.927c.3-.921 1.603-.921 1.902 0l1.519 4.674a1 1 0 00.95.69h4.915c.969 0 1.371 1.24.588 1.81l-3.976 2.888a1 1 0 00-.363 1.118l1.518 4.674c.3.922-.755 1.688-1.538 1.118l-3.976-2.888a1 1 0 00-1.176 0l-3.976 2.888c-.783.57-1.838-.197-1.538-1.118l1.518-4.674a1 1 0 00-.363-1.118l-3.976-2.888c-.784-.57-.38-1.81.588-1.81h4.914a1 1 0 00.951-.69l1.519-4.674z"/>
                         </svg>
                     </div>
-                    <h4 class="font-serif text-nb text-xl font-semibold mb-2">Compromisso</h4>
+                    <h4 class="font-serif text-nb text-lg sm:text-xl font-semibold mb-1 sm:mb-2">Compromisso</h4>
                     <p class="text-xs text-ngr leading-relaxed">Dedicação contínua à evolução e ao bem-estar de cada paciente.</p>
                 </div>
             </div>
@@ -399,35 +388,33 @@
 <!-- ════════════════════════════════════════
      POR QUE NEUROVIDA?
 ════════════════════════════════════════ -->
-<section id="neurovida" class="py-28 relative overflow-hidden" style="background-color:#1E8449;">
-    <!-- Ornamentos de fundo -->
-    <div class="absolute -top-32 -right-32 w-96 h-96 rounded-full opacity-10"
-         style="background:radial-gradient(circle, #2ECC71 0%, transparent 70%);"></div>
-    <div class="absolute -bottom-24 -left-24 w-80 h-80 rounded-full opacity-10"
-         style="background:radial-gradient(circle, #1A5276 0%, transparent 70%);"></div>
-    <div class="absolute top-0 left-0 w-full h-1 bg-ngo opacity-60"></div>
-    <div class="absolute bottom-0 left-0 w-full h-1 bg-ngo opacity-60"></div>
+<section id="neurovida" class="py-20 sm:py-24 lg:py-28 relative overflow-hidden" style="background:#1E8449;">
+    <div class="absolute -top-24 -right-24 w-72 sm:w-96 h-72 sm:h-96 rounded-full opacity-10"
+         style="background:radial-gradient(circle,#2ECC71 0%,transparent 70%);"></div>
+    <div class="absolute -bottom-20 -left-20 w-64 sm:w-80 h-64 sm:h-80 rounded-full opacity-10"
+         style="background:radial-gradient(circle,#1A5276 0%,transparent 70%);"></div>
+    <div class="absolute top-0 inset-x-0 h-1 bg-ngo opacity-60"></div>
+    <div class="absolute bottom-0 inset-x-0 h-1 bg-ngo opacity-60"></div>
 
-    <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
-        <div class="reveal space-y-8">
-            <p class="text-ngl text-xs tracking-widest2 uppercase font-medium">Nossa essência</p>
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center relative z-10 center-section">
+        <div class="reveal space-y-6 sm:space-y-8">
+            <p class="text-ngl text-xs uppercase tracking-[.22em] font-medium">Nossa essência</p>
 
-            <!-- Título com as duas palavras em destaque -->
             <h2 class="font-serif font-semibold leading-tight"
-                style="font-size:clamp(3rem,7vw,5.5rem);">
+                style="font-size:clamp(2.8rem,10vw,5.5rem);">
                 <span class="neuro-word">Neuro</span><span class="vida-word">vida</span>
             </h2>
 
-            <p class="ornament text-white/60 text-sm font-sans tracking-widest2 uppercase">
+            <p class="ornament text-white/55 text-xs sm:text-sm uppercase tracking-[.2em]">
                 por que este nome?
             </p>
 
             <!-- Bloco Neuro -->
-            <div class="text-left space-y-4 bg-white/5 border border-white/10 rounded-xl p-8">
-                <h3 class="font-serif text-white text-2xl font-semibold">
+            <div class="text-left space-y-3 bg-white/5 border border-white/10 rounded-xl p-6 sm:p-8">
+                <h3 class="font-serif text-white text-xl sm:text-2xl font-semibold">
                     <span class="neuro-word">Neuro</span> —
                 </h3>
-                <p class="font-light text-green-50 leading-relaxed">
+                <p class="body-text font-light text-green-50 leading-relaxed text-sm sm:text-base">
                     Porque acreditamos no poder da ciência do cérebro para iluminar o que muitas vezes parece
                     inexplicável: dificuldades de aprendizado, alterações de comportamento, esquecimentos,
                     desafios emocionais. A neurociência nos dá as ferramentas para enxergar com clareza
@@ -436,20 +423,20 @@
             </div>
 
             <!-- Bloco Vida -->
-            <div class="text-left space-y-4 bg-white/5 border border-white/10 rounded-xl p-8">
-                <h3 class="font-serif text-ngo text-2xl font-semibold">
+            <div class="text-left space-y-3 bg-white/5 border border-white/10 rounded-xl p-6 sm:p-8">
+                <h3 class="font-serif text-ngo text-xl sm:text-2xl font-semibold">
                     <span class="vida-word">Vida</span> —
                 </h3>
-                <p class="font-light text-green-50 leading-relaxed">
+                <p class="body-text font-light text-green-50 leading-relaxed text-sm sm:text-base">
                     Porque o nosso propósito vai além do diagnóstico. Queremos que cada pessoa que cruzar
                     nossa porta encontre não apenas respostas, mas um caminho de volta para si mesma.
                     Para o que mais importa. Para uma vida vivida com mais plenitude.
                 </p>
             </div>
 
-            <!-- Frase de fechamento -->
-            <blockquote class="font-serif italic text-white/90 text-xl leading-relaxed pt-2"
-                        style="font-size:clamp(1.1rem,2.5vw,1.5rem);">
+            <!-- Frase -->
+            <blockquote class="font-serif italic text-white/85 leading-relaxed"
+                        style="font-size:clamp(1rem,3vw,1.4rem);">
                 "Conhecer a mente transforma a forma como vivemos."
             </blockquote>
         </div>
@@ -460,71 +447,68 @@
 <!-- ════════════════════════════════════════
      SERVIÇOS
 ════════════════════════════════════════ -->
-<section id="servicos" class="py-28 bg-white">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10">
-        <div class="reveal text-center mb-20">
-            <p class="text-ngd text-xs tracking-widest2 uppercase font-medium mb-4">O que fazemos</p>
-            <h2 class="font-serif text-nb font-semibold" style="font-size:clamp(2rem,4vw,3rem);">Áreas de Atuação</h2>
-            <div class="w-16 h-0.5 bg-ngo mx-auto mt-5"></div>
+<section id="servicos" class="py-20 sm:py-24 lg:py-28 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+        <div class="reveal text-center center-section mb-14 sm:mb-20">
+            <p class="text-ngd text-xs uppercase tracking-[.22em] font-medium mb-3">O que fazemos</p>
+            <h2 class="font-serif text-nb font-semibold" style="font-size:clamp(1.8rem,4vw,3rem);">Áreas de Atuação</h2>
+            <div class="w-14 h-0.5 bg-ngo mx-auto mt-4"></div>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <!-- 1 col mobile / 2 col tablet / 4 col desktop -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 sm:gap-6">
 
-            <div class="card-lift reveal bg-ncr rounded-xl p-8 border border-ncr hover:border-ngl/30">
-                <div class="w-12 h-12 rounded-full bg-nb flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
+            <div class="card-lift reveal bg-ncr rounded-xl p-6 sm:p-8 border border-ncr hover:border-ngl/30">
+                <div class="w-11 h-11 rounded-full bg-nb flex items-center justify-center mb-5">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"/>
                     </svg>
                 </div>
-                <h3 class="font-serif text-nb text-2xl font-semibold mb-3">Avaliação</h3>
-                <div class="w-8 h-0.5 bg-ngo mb-4"></div>
-                <p class="text-sm text-ngr leading-relaxed">
+                <h3 class="font-serif text-nb text-xl sm:text-2xl font-semibold mb-2">Avaliação</h3>
+                <div class="w-7 h-0.5 bg-ngo mb-3"></div>
+                <p class="body-text text-sm text-ngr leading-relaxed">
                     Diagnóstico preciso do funcionamento cognitivo, emocional e comportamental
                     por meio de instrumentos validados cientificamente.
                 </p>
             </div>
 
-            <div class="card-lift reveal bg-ncr rounded-xl p-8 border border-ncr hover:border-ngd/30" style="transition-delay:.1s">
-                <div class="w-12 h-12 rounded-full bg-ngd flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+            <div class="card-lift reveal bg-ncr rounded-xl p-6 sm:p-8 border border-ncr hover:border-ngd/30" style="transition-delay:.1s">
+                <div class="w-11 h-11 rounded-full bg-ngd flex items-center justify-center mb-5">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
                     </svg>
                 </div>
-                <h3 class="font-serif text-nb text-2xl font-semibold mb-3">Reabilitação</h3>
-                <div class="w-8 h-0.5 bg-ngo mb-4"></div>
-                <p class="text-sm text-ngr leading-relaxed">
+                <h3 class="font-serif text-nb text-xl sm:text-2xl font-semibold mb-2">Reabilitação</h3>
+                <div class="w-7 h-0.5 bg-ngo mb-3"></div>
+                <p class="body-text text-sm text-ngr leading-relaxed">
                     Planos individualizados para restaurar e potencializar funções cognitivas,
                     promovendo autonomia e qualidade de vida.
                 </p>
             </div>
 
-            <div class="card-lift reveal bg-ncr rounded-xl p-8 border border-ncr hover:border-ngo/30" style="transition-delay:.2s">
-                <div class="w-12 h-12 rounded-full bg-ngo flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+            <div class="card-lift reveal bg-ncr rounded-xl p-6 sm:p-8 border border-ncr hover:border-ngo/30" style="transition-delay:.2s">
+                <div class="w-11 h-11 rounded-full bg-ngo flex items-center justify-center mb-5">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
                     </svg>
                 </div>
-                <h3 class="font-serif text-nb text-2xl font-semibold mb-3">Orientação</h3>
-                <div class="w-8 h-0.5 bg-ngo mb-4"></div>
-                <p class="text-sm text-ngr leading-relaxed">
+                <h3 class="font-serif text-nb text-xl sm:text-2xl font-semibold mb-2">Orientação</h3>
+                <div class="w-7 h-0.5 bg-ngo mb-3"></div>
+                <p class="body-text text-sm text-ngr leading-relaxed">
                     Acolhimento e psicoeducação para familiares e cuidadores,
                     estruturando redes de suporte eficazes e duradouras.
                 </p>
             </div>
 
-            <div class="card-lift reveal bg-ncr rounded-xl p-8 border border-ncr hover:border-nb/30" style="transition-delay:.3s">
-                <div class="w-12 h-12 rounded-full bg-nb flex items-center justify-center mb-6">
-                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5"
-                              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+            <div class="card-lift reveal bg-ncr rounded-xl p-6 sm:p-8 border border-ncr hover:border-nb/30" style="transition-delay:.3s">
+                <div class="w-11 h-11 rounded-full bg-nb flex items-center justify-center mb-5">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
                     </svg>
                 </div>
-                <h3 class="font-serif text-nb text-2xl font-semibold mb-3">Pesquisa</h3>
-                <div class="w-8 h-0.5 bg-ngo mb-4"></div>
-                <p class="text-sm text-ngr leading-relaxed">
+                <h3 class="font-serif text-nb text-xl sm:text-2xl font-semibold mb-2">Pesquisa</h3>
+                <div class="w-7 h-0.5 bg-ngo mb-3"></div>
+                <p class="body-text text-sm text-ngr leading-relaxed">
                     Comprometimento constante com as evidências científicas mais atuais
                     para garantir o melhor cuidado possível.
                 </p>
@@ -537,26 +521,25 @@
 <!-- ════════════════════════════════════════
      CTA FINAL
 ════════════════════════════════════════ -->
-<section id="agendar" class="py-28 bg-nb relative overflow-hidden">
+<section id="agendar" class="py-20 sm:py-24 lg:py-28 bg-nb relative overflow-hidden">
     <div class="absolute inset-0 opacity-5"
-         style="background-image:radial-gradient(circle at 75% 50%, #2ECC71 0%, transparent 60%);"></div>
-    <div class="absolute top-0 left-0 w-full h-1 bg-ngo"></div>
+         style="background:radial-gradient(circle at 75% 50%,#2ECC71 0%,transparent 60%);"></div>
+    <div class="absolute top-0 inset-x-0 h-1 bg-ngo"></div>
 
-    <div class="max-w-3xl mx-auto px-6 text-center relative z-10">
-        <div class="reveal space-y-6">
-            <p class="text-ngl text-xs tracking-widest2 uppercase font-medium">Dê o primeiro passo</p>
-            <h2 class="font-serif text-white font-semibold" style="font-size:clamp(2rem,4vw,3.2rem);">
+    <div class="max-w-2xl mx-auto px-4 sm:px-6 text-center relative z-10 center-section">
+        <div class="reveal space-y-5 sm:space-y-6">
+            <p class="text-ngl text-xs uppercase tracking-[.22em] font-medium">Dê o primeiro passo</p>
+            <h2 class="font-serif text-white font-semibold" style="font-size:clamp(1.8rem,5vw,3.2rem);">
                 Pronto para cuidar<br>da sua saúde mental?
             </h2>
-            <p class="font-light text-blue-100 leading-relaxed max-w-xl mx-auto">
+            <p class="body-text font-light text-blue-100 leading-relaxed max-w-xl mx-auto text-sm sm:text-base">
                 Entre em contato agora mesmo. Nossa equipe está pronta para acolher você
                 e encontrar o melhor horário para o seu atendimento.
             </p>
-
             <a href="https://wa.me/5519988006193?text=Ol%C3%A1%2C%20gostaria%20de%20agendar%20uma%20consulta%20no%20Instituto%20Neurovida."
                target="_blank"
-               class="cta-pulse inline-flex items-center gap-3 bg-ngo text-white text-sm font-medium tracking-wide px-10 py-5 rounded-md hover:bg-yellow-500 transition-colors duration-300 shadow-2xl mt-4">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+               class="cta-pulse inline-flex items-center justify-center gap-3 bg-ngo text-white text-sm font-medium px-8 sm:px-10 py-4 sm:py-5 rounded-md hover:bg-yellow-500 transition-colors shadow-2xl mt-2 w-full sm:w-auto">
+                <svg class="w-5 h-5 flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.582 2.128 2.182-.573c.978.58 1.911.928 3.145.929 3.178 0 5.767-2.587 5.768-5.766.001-3.187-2.575-5.77-5.764-5.771zm3.392 8.244c-.144.405-.837.774-1.17.824-.299.045-.677.063-1.092-.069-.252-.08-.575-.187-.988-.365-1.739-.751-2.874-2.502-2.961-2.617-.087-.116-.708-.94-.708-1.793s.448-1.273.607-1.446c.159-.173.346-.217.462-.217l.332.006c.106.005.249-.04.39.298.144.347.491 1.2.534 1.287.043.087.072.188.014.304-.058.116-.087.188-.173.289l-.26.304c-.087.086-.177.18-.076.354.101.174.449.741.964 1.201.662.591 1.221.774 1.394.86s.274.072.376-.043c.101-.116.433-.506.549-.68.116-.173.231-.145.39-.087s1.011.477 1.184.564.289.13.332.202c.045.072.045.419-.099.824zm-3.423-14.416c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm.029 18.88c-1.161 0-2.305-.292-3.318-.844l-3.677.964.984-3.595c-.607-1.052-.927-2.246-.926-3.468.001-3.825 3.113-6.937 6.937-6.937 3.825.001 6.938 3.115 6.937 6.938-.001 3.825-3.113 6.938-6.937 6.938z"/>
                 </svg>
                 Agendar pelo WhatsApp
@@ -569,19 +552,17 @@
 <!-- ════════════════════════════════════════
      FOOTER
 ════════════════════════════════════════ -->
-<footer class="bg-ncr border-t border-ngo/20 py-10">
-    <div class="max-w-7xl mx-auto px-6 lg:px-10 flex flex-col md:flex-row justify-between items-center gap-6">
-        <img src="logo-isolado.jpg"
-             alt="Instituto Neurovida"
-             class="h-12 w-auto object-contain">
-        <p class="font-sans text-xs text-ngr text-center">
-            &copy; 2026 Instituto Neurovida — Clínica de Neuropsicologia.<br class="md:hidden">
+<footer class="bg-ncr border-t border-ngo/20 py-8 sm:py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 flex flex-col sm:flex-row justify-between items-center gap-5 text-center sm:text-left">
+        <img src="logo-isolado.jpg" alt="Instituto Neurovida" class="h-10 sm:h-12 w-auto object-contain">
+        <p class="font-sans text-xs text-ngr">
+            &copy; 2026 Instituto Neurovida — Clínica de Neuropsicologia.<br>
             Todos os direitos reservados.
         </p>
-        <div class="flex items-center gap-6">
-            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium tracking-wide">Instagram</a>
-            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium tracking-wide">Facebook</a>
-            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium tracking-wide">LinkedIn</a>
+        <div class="flex items-center gap-5">
+            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium">Instagram</a>
+            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium">Facebook</a>
+            <a href="#" class="text-xs text-ngr hover:text-nb transition font-medium">LinkedIn</a>
         </div>
     </div>
 </footer>
@@ -591,19 +572,45 @@
      SCRIPTS
 ════════════════════════════════════════ -->
 <script>
-    // Scroll reveal
-    const observer = new IntersectionObserver(
-        (entries) => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
-        { threshold: 0.1 }
+    // ── Scroll reveal ───────────────────────
+    const revealObserver = new IntersectionObserver(
+        entries => entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); }),
+        { threshold: 0.08 }
     );
-    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
 
-    // Shadow no header ao rolar
+    // ── Header shadow ────────────────────────
     const header = document.getElementById('header');
     window.addEventListener('scroll', () => {
-        header.style.boxShadow = window.scrollY > 24
-            ? '0 2px 20px rgba(26,82,118,.10)'
-            : 'none';
+        header.style.boxShadow = window.scrollY > 20
+            ? '0 2px 18px rgba(26,82,118,.10)' : 'none';
+    }, { passive: true });
+
+    // ── Menu hamburger ───────────────────────
+    const menuBtn    = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const bar1 = document.getElementById('bar1');
+    const bar2 = document.getElementById('bar2');
+    const bar3 = document.getElementById('bar3');
+    let menuOpen = false;
+
+    menuBtn.addEventListener('click', () => {
+        menuOpen = !menuOpen;
+        mobileMenu.classList.toggle('open', menuOpen);
+        // Animação X
+        bar1.style.transform = menuOpen ? 'translateY(8px) rotate(45deg)' : '';
+        bar2.style.opacity   = menuOpen ? '0' : '1';
+        bar3.style.transform = menuOpen ? 'translateY(-8px) rotate(-45deg)' : '';
+    });
+
+    // Fecha menu ao clicar em link
+    document.querySelectorAll('.mobile-link').forEach(link => {
+        link.addEventListener('click', () => {
+            menuOpen = false;
+            mobileMenu.classList.remove('open');
+            bar1.style.transform = bar3.style.transform = '';
+            bar2.style.opacity = '1';
+        });
     });
 </script>
 </body>
