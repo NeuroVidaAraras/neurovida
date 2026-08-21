@@ -108,9 +108,24 @@
         .vida-word  { color: #D4AF37; }
 
         header { transition: box-shadow .3s; }
+
+        /* Impede que headings e blocos centralizados herdem text-justify */
+        h1, h2, h3, h4, h5, h6,
+        .text-center,
+        nav,
+        footer,
+        .ornament,
+        blockquote {
+            text-align: unset;
+        }
+        h1, h2 { text-align: left; }
+        .text-center h2,
+        .text-center h3,
+        .text-center p { text-align: center; }
+        blockquote { text-align: center; }
     </style>
 </head>
-<body class="antialiased">
+<body class="antialiased text-justify">
 
 <!-- ════════════════════════════════════════
      HEADER
@@ -143,9 +158,65 @@
 
 
 <!-- ════════════════════════════════════════
+     CAPA (SPLASH) — Logotipo + Fundo de pessoas felizes
+════════════════════════════════════════ -->
+<section id="capa" class="relative flex items-center justify-center overflow-hidden"
+         style="min-height:100vh;">
+
+    <!-- Foto de fundo: pessoas felizes / saúde mental (Unsplash) -->
+    <div class="absolute inset-0 bg-cover bg-center bg-no-repeat"
+         style="background-image: url('https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1600&auto=format&fit=crop&q=80');"></div>
+
+    <!-- Overlay gradiente para legibilidade e elegância da marca -->
+    <div class="absolute inset-0"
+         style="background: linear-gradient(160deg,
+             rgba(26,82,118,0.82) 0%,
+             rgba(30,132,73,0.65) 60%,
+             rgba(26,82,118,0.88) 100%);"></div>
+
+    <!-- Partícula / textura sutil -->
+    <div class="absolute inset-0 opacity-5"
+         style="background-image: radial-gradient(circle, #D4AF37 1px, transparent 1px);
+                background-size: 40px 40px;"></div>
+
+    <!-- Conteúdo centralizado -->
+    <div class="relative z-10 flex flex-col items-center text-center px-6 py-24 space-y-8">
+
+        <!-- Logo grande e centralizado -->
+        <div class="reveal">
+            <img src="logo-isolado.jpg"
+                 alt="Instituto Neurovida — Clínica de Neuropsicologia"
+                 class="w-80 md:w-[440px] max-w-full object-contain mx-auto drop-shadow-2xl rounded-xl"
+                 style="filter: drop-shadow(0 0 40px rgba(212,175,55,.35));">
+        </div>
+
+        <!-- Linha dourada -->
+        <div class="reveal w-24 h-px bg-ngo mx-auto opacity-80" style="transition-delay:.2s"></div>
+
+        <!-- Tagline -->
+        <p class="reveal font-sans font-light text-white/90 tracking-widest2 uppercase text-xs md:text-sm"
+           style="letter-spacing:.3em; transition-delay:.3s">
+            Clínica de Neuropsicologia
+        </p>
+
+        <!-- CTA de descida -->
+        <a href="#hero"
+           class="reveal mt-10 inline-flex flex-col items-center gap-2 text-white/70 hover:text-ngo transition-colors duration-300 group"
+           style="transition-delay:.5s">
+            <span class="font-sans text-xs tracking-widest2 uppercase">Conheça o Instituto</span>
+            <!-- Seta animada -->
+            <svg class="w-6 h-6 animate-bounce group-hover:text-ngo" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+        </a>
+    </div>
+</section>
+
+
+<!-- ════════════════════════════════════════
      HERO
 ════════════════════════════════════════ -->
-<section class="hero-bg pt-36 pb-28 lg:pt-44 lg:pb-36 overflow-hidden">
+<section id="hero" class="hero-bg pt-36 pb-28 lg:pt-44 lg:pb-36 overflow-hidden">
     <div class="max-w-7xl mx-auto px-6 lg:px-10">
         <div class="grid lg:grid-cols-2 gap-16 items-center">
 
