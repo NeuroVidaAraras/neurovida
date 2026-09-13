@@ -42,15 +42,12 @@
         }
 
         /* Animações */
-        @keyframes organic-drift {
-            0% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(4vw, -4vh) scale(1.05); }
-            66% { transform: translate(-3vw, 3vh) scale(0.95); }
-            100% { transform: translate(0, 0) scale(1); }
+        @keyframes organic-pan {
+            0% { transform: scale(1) translate(0, 0); }
+            50% { transform: scale(1.05) translate(-1%, -1%); }
+            100% { transform: scale(1) translate(0, 0); }
         }
-        .animate-organic { animation: organic-drift 18s infinite alternate ease-in-out; }
-        .delay-2000 { animation-delay: -6s; }
-        .delay-4000 { animation-delay: -12s; }
+        .animate-organic-pan { animation: organic-pan 30s infinite alternate ease-in-out; }
 
         @keyframes expand { from{transform:scaleX(0)} to{transform:scaleX(1)} }
         .gold-line { animation: expand 1.2s ease forwards; transform-origin: left; }
@@ -156,14 +153,12 @@
 
 <!-- CAPA — Logo Clean -->
 <section id="capa" class="relative flex items-center justify-center overflow-hidden bg-ncr" style="min-height:100svh;">
-    <!-- Efeito orgânico e suave de movimento -->
-    <div class="absolute inset-0 overflow-hidden pointer-events-none">
-        <div class="absolute w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-ngd rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.03] animate-organic -top-[20%] -left-[10%]"></div>
-        <div class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-nb rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.04] animate-organic delay-2000 top-[10%] -right-[10%]"></div>
-        <div class="absolute w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] bg-ngo rounded-full mix-blend-multiply filter blur-[140px] opacity-[0.03] animate-organic delay-4000 -bottom-[30%] left-[20%]"></div>
-    </div>
-    <div class="absolute inset-0 opacity-60 pointer-events-none"
-         style="background:radial-gradient(circle at center, rgba(243,240,236,1) 0%, transparent 80%);"></div>
+    <!-- Fundo orgânico com movimento suave (pan e zoom) -->
+    <div class="absolute inset-0 bg-cover animate-organic-pan"
+         style="background-image:url('https://images.unsplash.com/photo-1507608616759-54f48f0af0ee?w=1600&auto=format&fit=crop&q=80'); background-position: center; filter: blur(4px);"></div>
+    <!-- Overlay cremoso para manter o aspecto limpo e suave -->
+    <div class="absolute inset-0"
+         style="background:rgba(243,240,236,0.85);"></div>
     
     <div class="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 py-28 sm:py-32 gap-6 sm:gap-8 w-full">
         <div class="reveal w-full flex justify-center">
@@ -228,8 +223,8 @@
                 <div class="relative">
                     <div class="absolute -inset-4 rounded-2xl"
                          style="background:linear-gradient(135deg,rgba(212,175,55,.16) 0%,rgba(30,132,73,.09) 100%);filter:blur(18px);"></div>
-                    <img src="logo-isolado.jpg" alt="Instituto Neurovida"
-                         class="relative z-10 w-[480px] object-contain rounded-xl"
+                    <img src="https://images.unsplash.com/photo-1573497620053-ea5300f94f21?w=800&auto=format&fit=crop&q=80" alt="Atendimento humanizado e acolhedor"
+                         class="relative z-10 w-[480px] h-[550px] object-cover rounded-xl"
                          style="box-shadow:0 28px 56px rgba(26,82,118,.13),0 0 0 1px rgba(212,175,55,.22);">
                 </div>
             </div>
