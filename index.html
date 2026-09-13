@@ -42,6 +42,16 @@
         }
 
         /* Animações */
+        @keyframes organic-drift {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(4vw, -4vh) scale(1.05); }
+            66% { transform: translate(-3vw, 3vh) scale(0.95); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+        .animate-organic { animation: organic-drift 18s infinite alternate ease-in-out; }
+        .delay-2000 { animation-delay: -6s; }
+        .delay-4000 { animation-delay: -12s; }
+
         @keyframes expand { from{transform:scaleX(0)} to{transform:scaleX(1)} }
         .gold-line { animation: expand 1.2s ease forwards; transform-origin: left; }
 
@@ -146,9 +156,14 @@
 
 <!-- CAPA — Logo Clean -->
 <section id="capa" class="relative flex items-center justify-center overflow-hidden bg-ncr" style="min-height:100svh;">
-    <!-- Fundo clean com um leve brilho central muito sutil -->
-    <div class="absolute inset-0 opacity-40"
-         style="background:radial-gradient(circle at center, rgba(255,255,255,0.8) 0%, transparent 70%);"></div>
+    <!-- Efeito orgânico e suave de movimento -->
+    <div class="absolute inset-0 overflow-hidden pointer-events-none">
+        <div class="absolute w-[80vw] h-[80vw] max-w-[1000px] max-h-[1000px] bg-ngd rounded-full mix-blend-multiply filter blur-[100px] opacity-[0.03] animate-organic -top-[20%] -left-[10%]"></div>
+        <div class="absolute w-[60vw] h-[60vw] max-w-[800px] max-h-[800px] bg-nb rounded-full mix-blend-multiply filter blur-[120px] opacity-[0.04] animate-organic delay-2000 top-[10%] -right-[10%]"></div>
+        <div class="absolute w-[70vw] h-[70vw] max-w-[900px] max-h-[900px] bg-ngo rounded-full mix-blend-multiply filter blur-[140px] opacity-[0.03] animate-organic delay-4000 -bottom-[30%] left-[20%]"></div>
+    </div>
+    <div class="absolute inset-0 opacity-60 pointer-events-none"
+         style="background:radial-gradient(circle at center, rgba(243,240,236,1) 0%, transparent 80%);"></div>
     
     <div class="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 py-28 sm:py-32 gap-6 sm:gap-8 w-full">
         <div class="reveal w-full flex justify-center">
