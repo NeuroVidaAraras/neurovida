@@ -153,12 +153,14 @@
 
 <!-- CAPA — Logo Clean -->
 <section id="capa" class="relative flex items-center justify-center overflow-hidden bg-ncr" style="min-height:100svh;">
-    <!-- Fundo orgânico abstrato com movimento suave (pan e zoom) -->
-    <div class="absolute inset-0 bg-cover animate-organic-pan"
-         style="background-image:url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1600&auto=format&fit=crop&q=80'); background-position: center; filter: blur(2px);"></div>
-    <!-- Overlay cremoso para manter o aspecto limpo e suave -->
-    <div class="absolute inset-0"
-         style="background:rgba(243,240,236,0.85);"></div>
+    <!-- Fundo orgânico abstrato com as cores da marca -->
+    <div class="absolute inset-0 animate-organic-pan"
+         style="background: 
+            radial-gradient(ellipse 80% 60% at 20% 30%, rgba(30,132,73,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 70% 80% at 80% 70%, rgba(26,82,118,0.25) 0%, transparent 70%),
+            radial-gradient(ellipse 50% 50% at 50% 50%, rgba(212,175,55,0.12) 0%, transparent 60%),
+            radial-gradient(ellipse 90% 70% at 70% 20%, rgba(46,204,113,0.10) 0%, transparent 70%),
+            #F3F0EC;"></div>
     
     <div class="relative z-10 flex flex-col items-center text-center px-4 sm:px-8 py-28 sm:py-32 gap-6 sm:gap-8 w-full">
         <div class="reveal w-full flex justify-center">
